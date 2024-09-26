@@ -28,8 +28,9 @@ jobs:
 
       - name: Update Timestamp File
         run: |
+          export TZ="Asia/Jakarta" # Set timezone to UTC+7 (Jakarta time)
           current_time=$(date '+%Y-%m-%d %H:%M:%S')
-          echo "Updated on $current_time" > TIMESTAMP.txt
+          echo "Updated on $current_time (WIB)" > TIMESTAMP.txt
 
       - name: Setup Git Configuration
         run: |
@@ -38,8 +39,9 @@ jobs:
 
       - name: Prepare Commit
         run: |
+          export TZ="Asia/Jakarta" # Set timezone to UTC+7 (Jakarta time)
           current_time=$(date '+%Y-%m-%d %H:%M:%S')
-          commit_message="Update at $current_time"
+          commit_message="Update at $current_time (WIB)"
 
           git add TIMESTAMP.txt
           git commit -m "$commit_message" || echo "No changes to commit."
