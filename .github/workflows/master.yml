@@ -38,14 +38,15 @@ jobs:
 
       - name: Prepare Commit
         run: |
-          commit_messages=("Update: ⏰" "Refresh: 🔄" "Renew: 🌟" "Revise: 📝" "Amend: 🛠" "Adjust: 🔧" "Change: 📈" "Modify: 🖊" "Transform: 🌀" "Revamp: 🌈")
-          random_msg=${commit_messages[$RANDOM % ${#commit_messages[@]}]}
+          current_time=$(date '+%Y-%m-%d %H:%M:%S')
+          commit_message="Update at $current_time"
 
-          git add TIMESTAMP.txt
-          git commit -m "$random_msg - $current_time" || echo "No changes to commit."
+        git add TIMESTAMP.txt
+        git commit -m "$commit_message" || echo "No changes to commit."
 
       - name: GitHub Push
         uses: ad-m/github-push-action@v0.6.0
         with:
           directory: '.'
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
